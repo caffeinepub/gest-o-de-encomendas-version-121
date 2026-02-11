@@ -1,0 +1,71 @@
+type Status = 
+ variant {
+   concluido;
+   encomenda;
+   montagem;
+   porPagar;
+   producao;
+ };
+type ResumoFinanceiro = 
+ record {
+   totalAdiantado: nat;
+   totalEncomendas: nat;
+   totalPendente: nat;
+   totalValor: nat;
+ };
+type RelatorioPDF = 
+ record {
+   encomendas: vec Encomenda;
+   gestor: text;
+ };
+type Movimentacao = 
+ record {
+   novoStatus: Status;
+   statusAnterior: Status;
+   timestamp: int;
+ };
+type Gestor = record {nome: text;};
+type FileReference = 
+ record {
+   hash: text;
+   path: text;
+ };
+type Encomenda = 
+ record {
+   contato: text;
+   dataCriacao: int;
+   descricao: text;
+   gestor: text;
+   id: nat;
+   nomeCliente: text;
+   status: Status;
+   valorAdiantado: nat;
+   valorTotal: nat;
+ };
+service : {
+  adicionarGestor: (nome: text) -> ();
+  atualizarStatus: (id: nat) -> ();
+  criarEncomenda: (nomeCliente: text, descricao: text, contato: text, gestor:
+   text, valorTotal: nat, valorAdiantado: nat) -> (nat);
+  deletarEncomenda: (id: nat) -> ();
+  dropFileReference: (path: text) -> ();
+  editarEncomenda: (id: nat, nomeCliente: text, descricao: text, contato:
+   text, gestor: text, valorTotal: nat, valorAdiantado: nat) -> ();
+  filtrarPorGestorEStatus: (gestor: text, status: Status) ->
+   (vec Encomenda) query;
+  gerarRelatorioPDF: (status: Status, gestorFilter: opt text) ->
+   (record {
+      relatorios: vec RelatorioPDF;
+      resumoFinanceiro: ResumoFinanceiro;
+    }) query;
+  getEncomenda: (id: nat) -> (opt Encomenda) query;
+  getFileReference: (path: text) -> (FileReference) query;
+  getHistorico: (id: nat) -> (opt vec Movimentacao) query;
+  listFileReferences: () -> (vec FileReference) query;
+  listarGestores: () -> (vec Gestor) query;
+  listarPorGestor: (gestor: text) -> (vec Encomenda) query;
+  listarPorStatus: (status: Status) -> (vec Encomenda) query;
+  registerFileReference: (path: text, hash: text) -> ();
+  removerGestor: (nome: text) -> ();
+  verificarGestores: () -> (bool) query;
+}

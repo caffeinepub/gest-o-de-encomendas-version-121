@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Web app that generates customer budgets/quotes (orçamentos) with print/PDF support.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-update-the-or-amento-print-pdf-generation-so-that-every-generated-output-always-includes-an-extra-a4-page-appended-after-the-or-amento-page-containing-exactly-the-user-provided-portuguese-text-condi-es-gerais-de-venda-e-garantia-verbatim-preserving-line-breaks-and-bullet-structure-as-much-as-possible",
+      "title": "Update the orçamento print/PDF generation so that every generated output always includes an extra A4 page appended after the orçamento page containing exactly the user-provided Portuguese text “CONDIÇÕES GERAIS DE VENDA E GARANTIA …” (verbatim, preserving line breaks and bullet structure as much as possible).",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-if-an-additional-image-page-is-currently-appended-via-imagemadicional-ensure-the-new-general-terms-page-is-still-always-present-and-that-page-ordering-is-deterministic-or-amento-page-first-then-the-new-terms-page-then-if-present-the-imagemadicional-page",
+      "title": "If an additional image page is currently appended via imagemAdicional, ensure the new “General Terms” page is still always present and that page ordering is deterministic: orçamento page first, then the new terms page, then (if present) the imagemAdicional page.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Add an extra page after every orçamento in the printed/PDF output containing the provided 'Condições Gerais de Venda e Garantia' text (always appended to all budgets).",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Append a mandatory “General Terms of Sale and Warranty” page to every orçamento PDF/printout",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

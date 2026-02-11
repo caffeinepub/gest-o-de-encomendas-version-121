@@ -1,0 +1,46 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-update-the-or-amento-print-pdf-generation-so-that-every-generated-output-always-includes-an-extra-a4-page-appended-after-the-or-amento-page-containing-exactly-the-user-provided-portuguese-text-condi-es-gerais-de-venda-e-garantia-verbatim-preserving-line-breaks-and-bullet-structure-as-much-as-possible",
+      "featureTitle": "Update the orçamento print/PDF generation so that every generated output always includes an extra A4 page appended after the orçamento page containing exactly the user-provided Portuguese text “CONDIÇÕES GERAIS DE VENDA E GARANTIA …” (verbatim, preserving line breaks and bullet structure as much as possible).",
+      "files": [
+        "frontend/src/components/OrcamentoPDFDialog.tsx",
+        "frontend/src/constants/orcamentoGeneralTermsPT.ts"
+      ],
+      "components": [
+        "blob-storage@1.1.2",
+        "authorization@1.0.1",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-if-an-additional-image-page-is-currently-appended-via-imagemadicional-ensure-the-new-general-terms-page-is-still-always-present-and-that-page-ordering-is-deterministic-or-amento-page-first-then-the-new-terms-page-then-if-present-the-imagemadicional-page",
+      "featureTitle": "If an additional image page is currently appended via imagemAdicional, ensure the new “General Terms” page is still always present and that page ordering is deterministic: orçamento page first, then the new terms page, then (if present) the imagemAdicional page.",
+      "files": [
+        "frontend/src/components/OrcamentoPDFDialog.tsx"
+      ],
+      "components": [
+        "blob-storage@1.1.2",
+        "authorization@1.0.1",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

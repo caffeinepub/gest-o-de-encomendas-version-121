@@ -1,2 +1,3 @@
-# gest-o-de-encomendas-version-121
-Exported from Caffeine project: Append a mandatory “General Terms of Sale and Warranty” page to every orçamento PDF/printout
+## 
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

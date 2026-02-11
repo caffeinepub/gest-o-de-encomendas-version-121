@@ -1,0 +1,67 @@
+{
+  "kind": "build_request",
+  "title": "Append a mandatory “General Terms of Sale and Warranty” page to every orçamento PDF/printout",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Update the orçamento print/PDF generation so that every generated output always includes an extra A4 page appended after the orçamento page containing exactly the user-provided Portuguese text “CONDIÇÕES GERAIS DE VENDA E GARANTIA …” (verbatim, preserving line breaks and bullet structure as much as possible).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-20"
+        ],
+        "quotes": [
+          "sim, o orcamento como está está otimo, so queria que em qualquer orcamento que eu fizesse, aparecesse a pagina extra aseguir com esse texto. podes adicionar ao draft"
+        ]
+      },
+      "acceptanceCriteria": [
+        "From the orçamento PDF/print dialog, generating/printing any orçamento results in at least 2 pages: (1) the existing orçamento layout unchanged, (2) a new appended page containing the full provided terms text.",
+        "The appended page text matches the user-provided content exactly (no omissions or edits), and renders with preserved paragraphing/line breaks (e.g., via CSS white-space handling).",
+        "The new terms page is included regardless of orçamento contents (items, observations, desconto/IVA, etc.)."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "If an additional image page is currently appended via imagemAdicional, ensure the new “General Terms” page is still always present and that page ordering is deterministic: orçamento page first, then the new terms page, then (if present) the imagemAdicional page.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-18",
+          "msg-20"
+        ],
+        "quotes": [
+          "Basta agora **adicionar uma nova página no final**, contendo exatamente esse texto das condições gerais.",
+          "sim, o orcamento como está está otimo, so queria que em qualquer orcamento que eu fizesse, aparecesse a pagina extra aseguir com esse texto."
+        ]
+      },
+      "acceptanceCriteria": [
+        "When imagemAdicional exists, printing generates 3 pages in order: orçamento, terms text page, imagemAdicional page.",
+        "When imagemAdicional does not exist, printing generates 2 pages in order: orçamento, terms text page."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not change or break the existing orçamento page layout/formatting (only append the new page).",
+    "Do not edit any files under frontend/src/components/ui or any other frontend immutable paths listed in SYSTEM_CONTEXT."
+  ],
+  "nonGoals": [
+    "Adding UI controls to toggle/show/hide the terms page (it must always be appended).",
+    "Translating the provided terms text to another language.",
+    "Implementing a true PDF binary generator on the backend; keep using the existing HTML + window.print approach."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

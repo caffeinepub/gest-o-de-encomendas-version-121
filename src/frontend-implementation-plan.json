@@ -1,0 +1,43 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Append mandatory “Condições Gerais de Venda e Garantia” page to every Orçamento print/PDF output",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Always append a new A4 page to the orçamento print/PDF output containing the exact user-provided Portuguese “CONDIÇÕES GERAIS DE VENDA E GARANTIA …” text with preserved line breaks/bullets.",
+      "acceptanceCriteria": [
+        "From the orçamento PDF/print dialog, generating/printing any orçamento results in at least 2 pages: (1) the existing orçamento layout unchanged, (2) a new appended page containing the full provided terms text.",
+        "The appended page text matches the user-provided content exactly (no omissions or edits), and renders with preserved paragraphing/line breaks (e.g., via CSS white-space handling).",
+        "The new terms page is included regardless of orçamento contents (items, observations, desconto/IVA, etc.)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/constants/orcamentoGeneralTermsPT.ts",
+          "operation": "create",
+          "description": "Add a dedicated exported constant containing the full user-provided Portuguese terms text verbatim (including all line breaks and bullet structure), to be injected into the print HTML without edits."
+        },
+        {
+          "path": "frontend/src/components/OrcamentoPDFDialog.tsx",
+          "operation": "modify",
+          "description": "Update the HTML + window.print generation to always render an additional A4 `.page` immediately after the existing orçamento page containing the terms text from `orcamentoGeneralTermsPT` (rendered with preserved line breaks via `white-space: pre-wrap` or equivalent), without modifying the existing first page markup/styles beyond adding the new page after it."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Ensure deterministic page ordering when imagemAdicional exists: orçamento page first, then terms page, then imagemAdicional page.",
+      "acceptanceCriteria": [
+        "When imagemAdicional exists, printing generates 3 pages in order: orçamento, terms text page, imagemAdicional page.",
+        "When imagemAdicional does not exist, printing generates 2 pages in order: orçamento, terms text page."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/OrcamentoPDFDialog.tsx",
+          "operation": "modify",
+          "description": "Reorder the generated print HTML so the new terms `.page` is always inserted after the orçamento page and before the conditional imagemAdicional `.page` (keeping imagemAdicional logic intact), ensuring deterministic ordering in both cases."
+        }
+      ]
+    }
+  ]
+}
